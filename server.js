@@ -75,25 +75,25 @@ if (!Number.isInteger(port) || port <= 0) {
   throw new Error(`Invalid PORT value: "${rawPort}"`);
 }
 
-const server = app.listen(port, "0.0.0.0", () => {
-  console.log(`server is running on http://localhost:${port}`);
-});
+// const server = app.listen(port, "0.0.0.0", () => {
+//   console.log(`server is running on http://localhost:${port}`);
+// });
 
-// try {
-//   await mongoose.connect(process.env.MONGO_URL);
-//   app.listen(port, () => {
-//     console.log(`server running on PORT ${port}....`);
-//   });
-// } catch (error) {
-//   console.log(error);
-//   process.exit(1);
-// }
+try {
+  await mongoose.connect(process.env.MONGO_URL);
+  app.listen(port, "0.0.0.0", () => {
+    console.log(`server running on PORT ${port}....`);
+  });
+} catch (error) {
+  console.log(error);
+  process.exit(1);
+}
 
 // Optional: nicer error messages
-server.on("error", (err) => {
-  if (/** @type {{ code?: string }} */ (err).code === "EADDRINUSE") {
-    console.error(`Port ${port} is already in use.`);
-  } else {
-    console.error(err);
-  }
-});
+// server.on("error", (err) => {
+//   if (/** @type {{ code?: string }} */ (err).code === "EADDRINUSE") {
+//     console.error(`Port ${port} is already in use.`);
+//   } else {
+//     console.error(err);
+//   }
+// });
