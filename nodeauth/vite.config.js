@@ -9,7 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:5101", // 👈 no /api here
+        target: "http://localhost:5000", // 👈 no /api here
         changeOrigin: true,
         // no rewrite: keep /api prefix so it hits /api/v1/test on the backend
       },
